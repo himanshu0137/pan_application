@@ -1,27 +1,54 @@
 extends layout
 
 block content
-  h1 Hackathon Starter
-  p.lead A boilerplate for Node.js web applications.
+  h4 New Pan Card Application
   hr
   .row
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
+    form.form-horizontal(method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
+      .form-group
+        table
+          tr
+            td Category of Applicant
+            td
+              select(name="coa")
+                option(value="1") Individual
+            td Date
+            td 
+              input(type="date")
+          tr
+            td
+            td Last Name/Surname
+            td First Name
+            td Middle Name
+          tr
+            td Applicant's Name
+            td
+              input(type="text" name="applicantFirstName")
+            td
+              input(type="text" name="applicantLastName")
+            td
+              input(type="text" name="applicantMiddleName")
+          tr
+            td Name on Card
+            td(colspan="3")
+              input(type="text" name="nameOnCard")
+          tr
+            td
+            td Father's Last Name
+            td First Name
+            td Middle Name
+          tr
+            td Father's Name
+            td
+              input(type="text" name="fatherFirstName")
+            td
+              input(type="text" name="fatherLastName")
+            td
+              input(type="text" name="fatherMiddleName")
+
+      .form-group
+        .col-sm-offset-2.col-sm-8
+          button.btn.btn-primary(type='submit')
+            i.fa.fa-envelope
+            | Send
