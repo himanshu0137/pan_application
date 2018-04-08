@@ -1,0 +1,125 @@
+extends layout
+
+block content
+  h4 New Pan Card Application
+  hr
+  .row
+    form.form-horizontal(method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
+      .form-group
+        table
+          tr
+            td Category of Applicant
+            td
+              select(name="coa")
+                option(value="Individual") Individual
+            td Date
+            td 
+              input(type="date" name="formDate")
+          tr
+            td
+            td Last Name/Surname
+            td First Name
+            td Middle Name
+          tr
+            td Applicant's Name
+            td
+              input(type="text" name="applicantFirstName")
+            td
+              input(type="text" name="applicantLastName")
+            td
+              input(type="text" name="applicantMiddleName")
+          tr
+            td Name on Card
+            td(colspan="3")
+              input(type="text" name="nameOnCard")
+          tr
+            td
+            td Father's Last Name
+            td First Name
+            td Middle Name
+          tr
+            td Father's Name
+            td
+              input(type="text" name="fatherFirstName")
+            td
+              input(type="text" name="fatherLastName")
+            td
+              input(type="text" name="fatherMiddleName")
+          tr
+            td Date of Birth/Incorporation
+            td(colspan="3")
+              input(type="date" name="dob")
+              |(dd/MM/yyyy)
+          tr
+            td
+            td ISD CODE
+            td STD CODE
+            td Telephone Number
+          tr
+            td Contact Details
+            td 
+              input(type="text" name="contactISD")
+            td 
+              input(type="text" name="contactSTD")
+            td 
+              input(type="text" name="contactNo")
+          tr
+            td Email ID
+            td(colspan="3") 
+              input(type="email", name="email")
+          tr
+            td Address for Communication
+            td 
+              select(name="aoc")
+                option(value="INDIAN" selected) INDIAN
+          tr
+            td Name As Per Aadhaar
+            td 
+              input(type="text" name="napa")
+          tr
+            td PAN Card Dispatch State
+            td 
+              select(name="dispatchState")
+                option(value="") Please Select
+          tr
+            td Aadhaar/EID
+            td
+              select(name="AorE")
+                option(value="Aadhaar") Aadhaar
+                option(value="EID") EID
+          tr
+            td Aadhaar Number
+            td
+              input(type="text", name="aadhaarNo")
+          tr
+            td RA Address
+            td 
+              select(name="raAddress")
+                option(value="INDIAN" selected) INDIAN
+          tr
+            td Proof of Identity
+            td 
+              select(name="proofIdentity")
+                option(value="") Please Select
+          tr
+            td Proof of Address
+            td 
+              select(name="proofAddress")
+                option(value="") Please Select
+          tr
+            td Proof of DOB
+            td 
+              select(name="proofDOB")
+                option(value="") Please Select
+          tr
+            td Processing Fee
+            td 
+              input(type="number", name="fee", value="110.00")
+              |in (Rs.)
+
+      .form-group
+        .col-sm-offset-2.col-sm-8
+          button.btn.btn-primary(type='submit')
+            i.fa.fa-envelope
+            | Send

@@ -13,8 +13,15 @@
       ul.nav.navbar-nav
         li(class=(title == 'Home') ? 'active' : undefined)
           a(href='/') Home
-        li(class=(title == 'DashBoard') ? 'active' : undefined)
-          a(href='/DashBoard') DashBoard
+        if user
+          if user.role == 1
+            li(class=(title == 'DashBoard') ? 'active' : undefined)
+              a(href='/dashBoard') DashBoard
+            li(class=(title == 'Add Money') ? 'active' : undefined)
+              a(href='/addMoney') Add Money
+          else if user.role == 2
+            li(class=(title == 'Form') ? 'active' : undefined)
+              a(href='/form') Form
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
@@ -37,3 +44,5 @@
           if user.role == 1
             li(class=(title == 'Create Account') ? 'active' : undefined)
               a(href='/signup') Create Account
+          else if user.role == 2
+            span= user.balance

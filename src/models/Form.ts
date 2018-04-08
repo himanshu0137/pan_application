@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
+import { ObjectId, ObjectID } from "bson";
 
 const formSchema = new mongoose.Schema({
-    category: { type: String, default: "Individual" }, // ise bhi enum
+    agentId: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
+    category: { type: String, default: "Individual" },
     date: {type: Date, default: Date.now()},
     name: {
         first: String,
@@ -21,17 +23,55 @@ const formSchema = new mongoose.Schema({
         number: String
     },
     email: String,
-    addressForCommunication: String, // ye aur RA address same hai kya
+    addressForCommunication: {type: String, default: "INDIAN"},
     nameOnAadhaar: String,
-    dispatchState: String, // ise enum kar sakte hai kya
-    // aadhaar/EID field mai kya hai
+    dispatchState: String,
+    AorE: String,
     aadhaarNumber: String,
-    // ra address kya hai,
+    RAAddress: {type: String, default: "INDIAN"},
     proof: {
-        identity: Number,
-        address: Number,
-        dob: Number
+        identity: String,
+        address: String,
+        dob: String
     },
-    fee: Number,
-    // Aur ye aadhaar authentication ka kya karna
+    fee: Number
   }, { timestamps: true });
+
+  export type FormModel = mongoose.Document &  {
+    id: ObjectId,
+    category: string,
+    date: Date,
+    name: {
+        first: string,
+        last: string,
+        middle: string
+    },
+    fatherName: {
+        first: string,
+        last: string,
+        middle: string
+    },
+    PANCardName: string,
+    dob: Date,
+    contactNumber: {
+        ISDCode: string,
+        STDCode: string,
+        number: string
+    },
+    email: string,
+    addressForCommunication: string,
+    nameOnAadhaar: string,
+    dispatchState: string,
+    AorE: string,
+    aadhaarNumber: string,
+    RAAddress: string,
+    proof: {
+        identity: string,
+        address: string,
+        dob: string
+    },
+    fee: number
+  };
+
+const Form = mongoose.model("Form", formSchema);
+export default Form;
