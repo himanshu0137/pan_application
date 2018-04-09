@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .page-header
+    h3 Users
+
+  table
+    tr
+      th S. No.
+      th Agent Name/ Email
+      th Current Balance
+      th Amount
+      th
+    each user, index in users
+      tr
+        td= index+1
+        td= user.name || user.email
+        td= "Rs. " + user.balance
+        form(method="POST")
+          input(type="hidden", name="agentId", value=user._id)
+          td
+            input(type="number", name="amount", required)
+          td
+            input(type="submit")

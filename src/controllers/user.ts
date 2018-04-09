@@ -316,6 +316,40 @@ export let getForgot = (req: Request, res: Response) => {
   });
 };
 
+export let addBalance = (req: Request, res: Response, next: NextFunction) => {
+  if (req.user.role == 1) {
+    User.findById(req.body.agentId, (err, doc) => {
+      if (err) {
+        return next(err);
+      }
+      doc.balance += parseInt(req.body.amount);
+      doc.save();
+      res.redirect("/addmoney");
+      req.flash("success", "Balance added");
+    });
+  }
+  else {
+  return next("Only admin");
+}
+};
+
+export let getBalance = (req: Request, res: Response) => {
+  if (req.user.role == 1) {
+  User.find({"role": 2}).select("name email balance").exec((err, doc) => {
+    if (err) {
+      return res.redirect("/");
+    }
+    return res.render("addMoney", {
+      title: "Add Money",
+      users: doc
+    });
+  });
+}
+else {
+return res.redirect("/");
+}
+};
+
 /**
  * POST /forgot
  * Create a random token, then the send user an email with a reset link.

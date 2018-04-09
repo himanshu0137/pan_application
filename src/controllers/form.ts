@@ -88,3 +88,8 @@ export let postForm = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
+export let getFormPDF = (req: Request, res: Response) => {
+    Form.findById(req.params.formId, (err, doc) => {
+        res.send(doc);
+    });
+};

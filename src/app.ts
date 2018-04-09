@@ -101,6 +101,8 @@ app.get("/logout", userController.logout);
 app.post("/reset/:token", userController.postReset);
 app.get("/signup", userController.getSignup);
 app.post("/signup", userController.postSignup);
+app.get("/addmoney", userController.getBalance);
+app.post("/addmoney", userController.addBalance);
 // app.get("/contact", contactController.getContact);
 // app.post("/contact", contactController.postContact);
 // app.get("/account", passportConfig.isAuthenticated, userController.getAccount);
@@ -111,6 +113,7 @@ app.post("/account/password", passportConfig.isAuthenticated, userController.pos
 app.get("/form", formController.getForm);
 app.post("/form", formController.postForm);
 app.get("/dashboard", dashboardController.getDashboard);
+app.get("/form/get/:formId", formController.getFormPDF);
 
 /**
  * API examples routes.

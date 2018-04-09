@@ -8,7 +8,6 @@ export let getDashboard = (req: Request, res: Response) => {
             return res.redirect("/");
         }
         else {
-            console.log(doc);
             return res.render("dashboard", {
                 title: "DashBoard",
                 forms: doc
