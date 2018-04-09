@@ -81,6 +81,7 @@ export let getSignup = (req: Request, res: Response) => {
 export let postSignup = (req: Request, res: Response, next: NextFunction) => {
   req.assert("email", "Email is not valid").isEmail();
   req.assert("password", "Password must be at least 4 characters long").len({ min: 4 });
+  req.assert("name", "Name cannot be blank").notEmpty();
   req.assert("confirmPassword", "Passwords do not match").equals(req.body.password);
   req.sanitize("email").normalizeEmail({ gmail_remove_dots: false });
 
@@ -92,6 +93,7 @@ export let postSignup = (req: Request, res: Response, next: NextFunction) => {
   }
 
   const user = new User({
+    name: req.body.name,
     email: req.body.email,
     password: req.body.password
   });
@@ -143,8 +145,8 @@ export let postUpdateProfile = (req: Request, res: Response, next: NextFunction)
   User.findById(req.user.id, (err, user: UserModel) => {
     if (err) { return next(err); }
     // user.email = req.body.email || "";
-    user.profile.name = req.body.name || "";
-    user.profile.gender = req.body.gender || "";
+    user.name = req.body.name || "";
+    // user.profile.gender = req.body.gender || "";
     user.save((err: WriteError) => {
       if (err) {
         if (err.code === 11000) {

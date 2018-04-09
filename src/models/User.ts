@@ -13,11 +13,7 @@ export type UserModel = mongoose.Document & {
   passwordResetExpires: Date,
   role: UserRole,
   balance: number,
-  profile: {
-    name: string,
-    gender: string,
-    picture: string
-  },
+  name: String,
   addBalance: (amount: number) => number,
   comparePassword: (candidatePassword: string, cb: (err: any, isMatch: any) => {}) => void,
   gravatar: (size: number) => string
@@ -36,11 +32,7 @@ const userSchema = new mongoose.Schema({
   passwordResetExpires: Date,
   role: { type: Number, default: UserRole.User },
   balance: { type: Number, default: 0 },
-  profile: {
-    name: String,
-    gender: String,
-    picture: String
-  }
+  name: String
 }, { timestamps: true });
 
 /**

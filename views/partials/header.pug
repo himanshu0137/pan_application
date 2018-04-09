@@ -16,7 +16,7 @@
         if user
           if user.role == 1
             li(class=(title == 'DashBoard') ? 'active' : undefined)
-              a(href='/dashBoard') DashBoard
+              a(href='/dashboard') DashBoard
             li(class=(title == 'Add Money') ? 'active' : undefined)
               a(href='/addMoney') Add Money
           else if user.role == 2
@@ -29,16 +29,9 @@
         else
           li.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
             a.dropdown-toggle(href='#', data-toggle='dropdown')
-              if user.profile.picture
-                img(src=user.profile.picture, alt=(user.profile.name || user.email || user.id))
-              else
-                img(src=user.gravatar(60), alt=(user.profile.name || user.email || user.id))
-              span= user.profile.name || user.email || user.id
+              span= user.name || user.email
               i.caret
             ul.dropdown-menu
-              li
-                a(href='/account') My Account
-              li.divider
               li
                 a(href='/logout') Logout
           if user.role == 1
