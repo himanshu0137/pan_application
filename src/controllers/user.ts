@@ -318,7 +318,7 @@ export let getForgot = (req: Request, res: Response) => {
 
 export let addBalance = (req: Request, res: Response, next: NextFunction) => {
   if (req.user.role == 1) {
-    User.findById(req.body.agentId, (err, doc) => {
+    User.findById(req.body.agentId, (err, doc: UserModel) => {
       if (err) {
         return next(err);
       }
