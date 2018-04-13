@@ -12,7 +12,8 @@ block content
             td Category of Applicant
             td
               select(name="coa")
-                option(value="Individual") Individual
+                option(value="Individual" selected) Individual
+                option(value="Corporate") Corporate
             td Date
             td 
               input(type="date" name="formDate")
@@ -73,6 +74,7 @@ block content
             td 
               select(name="aoc")
                 option(value="INDIAN" selected) INDIAN
+                option(value="FOREIGN") FOREIGN
           tr
             td Name As Per Aadhaar
             td 
@@ -81,13 +83,14 @@ block content
             td PAN Card Dispatch State
             td 
               select(name="dispatchState")
-                option(value="") Please Select
+                each value, index in states
+                  option(value=index)= value
           tr
             td Aadhaar/EID
             td
               select(name="AorE")
                 option(value="Aadhaar") Aadhaar
-                option(value="EID") EID
+                option(value="EIDNumber") EID Number
           tr
             td Aadhaar Number
             td
@@ -97,25 +100,29 @@ block content
             td 
               select(name="raAddress")
                 option(value="INDIAN" selected) INDIAN
+                option(value="FOREIGN") FOREIGN
           tr
             td Proof of Identity
             td 
               select(name="proofIdentity")
-                option(value="") Please Select
+                each value, index in identityProofSelection
+                  option(value=index)= value
           tr
             td Proof of Address
             td 
               select(name="proofAddress")
-                option(value="") Please Select
+                each value, index in addressProofSelection
+                  option(value=index)= value
           tr
             td Proof of DOB
             td 
               select(name="proofDOB")
-                option(value="") Please Select
+                each value, index in dobProofSelection
+                  option(value=index)= value
           tr
             td Processing Fee
             td 
-              input(type="number", name="fee", value="110.00")
+              input(type="number", name="fee", value="110.00", disabled)
               |in (Rs.)
 
       .form-group

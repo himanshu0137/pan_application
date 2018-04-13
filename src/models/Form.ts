@@ -30,9 +30,9 @@ const formSchema = new mongoose.Schema({
     aadhaarNumber: String,
     RAAddress: {type: String, default: "INDIAN"},
     proof: {
-        identity: String,
-        address: String,
-        dob: String
+        identity: Number,
+        address: Number,
+        dob: Number
     },
     fee: Number
   }, { timestamps: true });
@@ -61,7 +61,7 @@ const formSchema = new mongoose.Schema({
     email: string,
     addressForCommunication: string,
     nameOnAadhaar: string,
-    dispatchState: string,
+    dispatchState: Number,
     AorE: string,
     aadhaarNumber: string,
     RAAddress: string,
