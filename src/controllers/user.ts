@@ -316,15 +316,32 @@ export let getForgot = (req: Request, res: Response) => {
   });
 };
 
-export let addBalance = (req: Request, res: Response, next: NextFunction) => {
+export let getEditUser = (req: Request, res: Response) => {
+  if (req.isAuthenticated() && req.user.role == 1) {
+    User.findById(req.params.agentId, (err, doc) => {
+      if (err) {
+        return res.redirect("/users");
+      }
+      else {
+        return res.render("edituser", {
+          title: "Edit User",
+          agent: doc
+        });
+      }
+    });
+  }
+};
+export let editUser = (req: Request, res: Response, next: NextFunction) => {
   if (req.user.role == 1) {
-    User.findById(req.body.agentId, (err, doc: UserModel) => {
+    User.findById(req.params.agentId, (err, doc: UserModel) => {
       if (err) {
         return next(err);
       }
+      doc.email = req.body.email;
+      doc.name = req.body.name;
       doc.balance += parseInt(req.body.amount);
       doc.save();
-      res.redirect("/addmoney");
+      res.redirect("/users");
       req.flash("success", "Balance added");
     });
   }
@@ -333,14 +350,27 @@ export let addBalance = (req: Request, res: Response, next: NextFunction) => {
 }
 };
 
-export let getBalance = (req: Request, res: Response) => {
+export let deleteUser = (req: Request, res: Response) => {
   if (req.user.role == 1) {
-  User.find({"role": 2}).select("name email balance").exec((err, doc) => {
+  User.findByIdAndRemove(req.params.agentId, (err, doc) => {
     if (err) {
       return res.redirect("/");
     }
-    return res.render("addMoney", {
-      title: "Add Money",
+    return res.redirect("/users");
+  });
+}
+else {
+return res.redirect("/");
+}
+};
+export let getUsers = (req: Request, res: Response) => {
+  if (req.user.role == 1) {
+  User.find({"role": 2}, (err, doc) => {
+    if (err) {
+      return res.redirect("/");
+    }
+    return res.render("users", {
+      title: "Users",
       users: doc
     });
   });

@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  .page-header
+    h3 Edit User
+
+  form.form-horizontal(method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label.col-sm-3.control-label(for='email') Email
+      .col-sm-7
+        input.form-control(type='email', name='email', value=agent.email, autofocus, required)
+    .form-group
+      label.col-sm-3.control-label(for='name') Name
+      .col-sm-7
+        input.form-control(type='text', name='name', value=agent.name,  required)
+    .form-group
+      label.col-sm-3.control-label(for='name') Add Balance
+      .col-sm-7
+        input.form-control(type='number', name='amount', value=0,  required)
+    .form-group
+      .col-sm-offset-3.col-sm-7
+        button.btn.btn-success(type='submit')
+          i.fa.fa-user-plus
+          | Edit User
+  form.form-horizontal(method='GET', action="./deleteUser/"+agent.id)
+    .form-group
+      .col-sm-offset-3.col-sm-7
+        button.btn.btn-danger(type='submit')
+          i.fa.fa-user-plus
+          | Delete User
