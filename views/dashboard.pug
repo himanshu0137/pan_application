@@ -8,10 +8,14 @@ block content
     tr
       th S. no
       th Agent Name/ Email
+      th Client Name
+      th Date
       th Form
     each form, index in forms
       tr
         td= index+1
-        td= form.agentId.name || form.agentId.email
+        td= form.agentId.name || form.agentId.email || ''
+        td= form.nameOnAadhaar || ''
+        td= dateTransform(form.date || '')
         td
           a(href="./form/get/"+form._id)| Click here
