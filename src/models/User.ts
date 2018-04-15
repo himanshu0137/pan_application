@@ -11,6 +11,7 @@ export type UserModel = mongoose.Document & {
   password: string,
   passwordResetToken: string,
   passwordResetExpires: Date,
+  isActive: boolean,
   role: UserRole,
   balance: number,
   name: String,
@@ -30,6 +31,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
+  isActive: {type : Boolean, default: true},
   role: { type: Number, default: UserRole.User },
   balance: { type: Number, default: 0 },
   name: String

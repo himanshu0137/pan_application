@@ -352,11 +352,13 @@ export let editUser = (req: Request, res: Response, next: NextFunction) => {
 
 export let deleteUser = (req: Request, res: Response) => {
   if (req.user.role == 1) {
-  User.findByIdAndRemove(req.params.agentId, (err, doc) => {
+  User.findById(req.params.agentId, (err, doc: UserModel) => {
     if (err) {
       return res.redirect("/");
     }
-    return res.redirect("/users");
+    doc.isActive = false;
+    doc.save();
+    return res.redirect("/");
   });
 }
 else {
@@ -365,7 +367,7 @@ return res.redirect("/");
 };
 export let getUsers = (req: Request, res: Response) => {
   if (req.user.role == 1) {
-  User.find({"role": 2}, (err, doc) => {
+  User.find({"role": 2, "isActive": true}, (err, doc) => {
     if (err) {
       return res.redirect("/");
     }
