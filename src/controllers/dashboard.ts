@@ -1,5 +1,6 @@
 import { default as Form, FormModel } from "../models/Form";
 import { default as User, UserModel } from "../models/User";
+import { default as BalanceHistory, BalanceHistoryModel } from "../models/BalanceHistory";
 import { Request, Response } from "express";
 import { ObjectId } from "bson";
 
@@ -26,4 +27,19 @@ export let getDashboard = (req: Request, res: Response) => {
             });
         }
     });
+};
+
+export let getBalanceHistory = (req: Request, res: Response) => {
+    if (req.isAuthenticated() && req.user.role == 1) {
+        BalanceHistory.find({}).populate("agentId", "-_id name email").sort("-date").exec((err, doc) => {
+            if (err) {
+                return res.redirect("/");
+            }
+            return res.render("balancehistory", {
+                title: "Balance History",
+                logs: doc,
+                dateTransform: dateTransform
+            });
+        });
+    }
 };

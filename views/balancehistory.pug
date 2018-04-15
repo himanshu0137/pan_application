@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .page-header
+    h3 Balance History
+
+  table
+    tr
+      th S. no
+      th Agent Name/ Email
+      th Balance Added
+      th Date
+    each log, index in logs
+      tr
+        td= index+1
+        td= log.agentId.name || log.agentId.email || ''
+        td= log.balanceAdded || ''
+        td= dateTransform(log.date || '')

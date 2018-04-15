@@ -3,9 +3,10 @@ import crypto from "crypto";
 import nodemailer from "nodemailer";
 import passport from "passport";
 import { default as User, UserModel, AuthToken, UserRole } from "../models/User";
+import { default as BalanceHistory, BalanceHistoryModel } from "../models/BalanceHistory";
 import { Request, Response, NextFunction } from "express";
 import { IVerifyOptions } from "passport-local";
-import { WriteError } from "mongodb";
+import { WriteError, ObjectId } from "mongodb";
 const request = require("express-validator");
 
 
@@ -339,10 +340,19 @@ export let editUser = (req: Request, res: Response, next: NextFunction) => {
       }
       doc.email = req.body.email;
       doc.name = req.body.name;
-      doc.balance += parseInt(req.body.amount);
+      const amount = parseInt(req.body.amount);
+      if (amount > 0) {
+        doc.balance += amount;
+        const balanceHistory = new BalanceHistory({
+          agentId: new ObjectId(req.user.id),
+          balanceAdded: amount,
+          date: Date.now()
+        });
+        balanceHistory.save();
+      }
       doc.save();
       res.redirect("/users");
-      req.flash("success", "Balance added");
+      req.flash("success", "User edited");
     });
   }
   else {

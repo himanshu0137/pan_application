@@ -19,6 +19,8 @@
           if user.role == 1
             li(class=(title == 'Users') ? 'active' : undefined)
               a(href='/users') Users
+            li(class=(title == 'Balance History') ? 'active' : undefined)
+              a(href='/balancehistory') Balance History
           else if user.role == 2
             li(class=(title == 'Form') ? 'active' : undefined)
               a(href='/form') Form
