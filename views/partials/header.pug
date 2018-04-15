@@ -40,4 +40,5 @@
             li(class=(title == 'Create Account') ? 'active' : undefined)
               a(href='/signup') Create Account
           else if user.role == 2
-            span= "Rs. "+user.balance
+            li
+              a= "Rs. "+user.balance
