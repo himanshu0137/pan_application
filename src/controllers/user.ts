@@ -344,7 +344,7 @@ export let editUser = (req: Request, res: Response, next: NextFunction) => {
       if (amount > 0) {
         doc.balance += amount;
         const balanceHistory = new BalanceHistory({
-          agentId: new ObjectId(req.user.id),
+          agentId: new ObjectId(doc.id),
           balanceAdded: amount,
           date: Date.now()
         });
