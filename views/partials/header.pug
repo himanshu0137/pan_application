@@ -14,9 +14,9 @@
         li(class=(title == 'Home') ? 'active' : undefined)
           a(href='/') Home
         if user
-          if user.role == 1
-            li(class=(title == 'DashBoard') ? 'active' : undefined)
+          li(class=(title == 'DashBoard') ? 'active' : undefined)
               a(href='/dashboard') DashBoard
+          if user.role == 1
             li(class=(title == 'Users') ? 'active' : undefined)
               a(href='/users') Users
           else if user.role == 2
