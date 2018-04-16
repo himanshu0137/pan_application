@@ -158,6 +158,7 @@ export let postForm = (req: Request, res: Response, next: NextFunction) => {
         last: req.body.fatherLastName,
         middle: req.body.fatherMiddleName
     },
+    nameOnAadhaar: req.body.napa,
     PANCardName: req.body.nameOnCard,
     dob: req.body.dob,
     contactNumber: {
