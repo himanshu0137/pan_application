@@ -109,10 +109,18 @@ const states = [
     "UTTARAKHAND",
     "WEST BENGAL"
 ];
-/**
- * GET /form
- * Form page.
- */
+
+const dateTransform = (date: Date) => {
+    if (date)
+        return date.toDateString();
+    return "";
+};
+
+const getOption = (index: number, array: Array<string>) => {
+    if (index > 0)
+        return array[index];
+    return "";
+};
 export let getForm = (req: Request, res: Response) => {
   if (req.user) {
     return res.render("form", {
@@ -197,6 +205,15 @@ export let postForm = (req: Request, res: Response, next: NextFunction) => {
 
 export let getFormPDF = (req: Request, res: Response) => {
     Form.findById(req.params.formId, (err, doc) => {
-        res.send(doc);
+        res.render("formdetails", {
+            title: "Form Details",
+            form: doc,
+            getOption: getOption,
+            dateTransform: dateTransform,
+            dobProofSelection: dobProofSelection,
+            addressProofSelection: addressProofSelection,
+            identityProofSelection: identityProofSelection,
+            states: states
+        });
     });
 };

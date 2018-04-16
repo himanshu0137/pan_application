@@ -66,9 +66,9 @@ const formSchema = new mongoose.Schema({
     aadhaarNumber: string,
     RAAddress: string,
     proof: {
-        identity: string,
-        address: string,
-        dob: string
+        identity: Number,
+        address: Number,
+        dob: Number
     },
     fee: number
   };

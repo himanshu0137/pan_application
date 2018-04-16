@@ -1,0 +1,78 @@
+extends layout
+
+block content
+  h4 New Pan Card Application
+  hr
+  table.table
+    tr
+      th Category of Applicant
+      td(colspan="3")= form.category || ''
+    tr
+      th Date
+      td(colspan="3")= dateTransform(form.date || '')
+    tr
+      th(rowspan="2") Applicant's Name
+      th Last Name/Surname
+      th First Name
+      th Middle Name
+    tr
+      td= form.name.last || ''
+      td= form.name.first || ''
+      td= form.name.middle || ''
+    tr
+      th Name on Card
+      td(colspan="3")= form.PANCardName || ''
+    tr
+      th(rowspan="2") Father's Name
+      th Father's Last Name
+      th First Name
+      th Middle Name
+    tr
+      td= form.fatherName.last || ''
+      td= form.fatherName.first || ''
+      td= form.fatherName.middle || ''
+    tr
+      th Date of Birth/Incorporation
+      td(colspan="3")= dateTransform(form.dob || '')
+    tr
+      th(rowspan="2") Contact Details
+      th ISD CODE
+      th STD CODE
+      th Telephone Number
+    tr
+      td= form.contactNumber.ISDCode || ''
+      td= form.contactNumber.STDCode || ''
+      td= form.contactNumber.number || ''
+    tr
+      th Email ID
+      td(colspan="3")= form.email || ''
+    tr
+      th Address for Communication
+      td(colspan="3")= form.addressForCommunication || ''
+    tr
+      th Name As Per Aadhaar
+      td(colspan="3")= form.nameOnAadhaar || ''
+    tr
+      th PAN Card Dispatch State
+      td= getOption(form.dispatchState, states)
+    tr
+      th Aadhaar/EID
+      td(colspan="3")= form.AorE || ''
+    tr
+      th Aadhaar Number
+      td(colspan="3")= form.aadhaarNumber || ''
+    tr
+      th RA Address
+      td(colspan="3")= form.RAAddress || ''
+    tr
+      th Proof of Identity
+      td(colspan="3")= getOption(form.proof.identity, identityProofSelection)
+    tr
+      th Proof of Address
+      td(colspan="3")= getOption(form.proof.address, addressProofSelection)
+    tr
+      th Proof of DOB
+      td(colspan="3")= getOption(form.proof.dob, dobProofSelection)
+    tr
+      th Processing Fee
+      td= ('Rs. '+form.fee) || ''
