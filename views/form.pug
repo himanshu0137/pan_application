@@ -15,7 +15,7 @@ block content
                 option(value="Individual" selected) Individual
                 option(value="Corporate") Corporate
             td Date
-            td 
+            td(colspan="3")
               input(type="date" name="formDate")
           tr
             td
@@ -71,57 +71,57 @@ block content
               input(type="email", name="email")
           tr
             td Address for Communication
-            td 
+            td(colspan="3") 
               select(name="aoc")
                 option(value="INDIAN" selected) INDIAN
                 option(value="FOREIGN") FOREIGN
           tr
             td Name As Per Aadhaar
-            td 
+            td(colspan="3") 
               input(type="text" name="napa")
           tr
             td PAN Card Dispatch State
-            td 
+            td(colspan="3") 
               select(name="dispatchState")
                 each value, index in states
                   option(value=index)= value
           tr
             td Aadhaar/EID
-            td
+            td(colspan="3")
               select(name="AorE")
                 option(value="Aadhaar") Aadhaar
                 option(value="EIDNumber") EID Number
           tr
             td Aadhaar Number
-            td
+            td(colspan="3")
               input(type="text", name="aadhaarNo")
           tr
             td RA Address
-            td 
+            td(colspan="3") 
               select(name="raAddress")
                 option(value="INDIAN" selected) INDIAN
                 option(value="FOREIGN") FOREIGN
           tr
             td Proof of Identity
-            td 
+            td(colspan="3") 
               select(name="proofIdentity")
                 each value, index in identityProofSelection
                   option(value=index)= value
           tr
             td Proof of Address
-            td 
+            td(colspan="3") 
               select(name="proofAddress")
                 each value, index in addressProofSelection
                   option(value=index)= value
           tr
             td Proof of DOB
-            td 
+            td(colspan="3") 
               select(name="proofDOB")
                 each value, index in dobProofSelection
                   option(value=index)= value
           tr
             td Processing Fee
-            td 
+            td(colspan="3") 
               input(type="number", name="fee", value="110.00", disabled)
               |in (Rs.)
 
