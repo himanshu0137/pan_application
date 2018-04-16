@@ -175,8 +175,7 @@ export let postForm = (req: Request, res: Response, next: NextFunction) => {
         identity: parseInt(req.body.proofIdentity),
         address: parseInt(req.body.proofAddress),
         dob: parseInt(req.body.proofDOB)
-    },
-    fee: parseInt(req.body.fee)
+    }
   });
   form.save((err) => {
     if (err) { return next(err); }
