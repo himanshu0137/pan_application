@@ -11,9 +11,9 @@ block content
           tr
             td Category of Applicant
             td
-              select(name="coa")
-                option(value="Individual" selected) Individual
-                option(value="Corporate") Corporate
+              select(name="coa" id="coa")
+                each value, index in coaSelection
+                  option(value=index)= value
             td Date
             td(colspan="3")
               input(type="date" name="formDate")
