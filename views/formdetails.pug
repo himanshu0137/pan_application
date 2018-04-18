@@ -5,8 +5,13 @@ block content
   hr
   table.table
     tr
+      th Acknowlegment ID
+      td(colspan="2")= "mrei-25544-"+form.id
+      td
+        button.btn.button-info(onclick="window.print();") Print
+    tr
       th Category of Applicant
-      td(colspan="3")= form.category || ''
+      td(colspan="3")= getOption(form.category, coaSelection)
     tr
       th Date
       td(colspan="3")= dateTransform(form.date || '')

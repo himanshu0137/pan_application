@@ -44,7 +44,7 @@ export let postForm = (req: Request, res: Response, next: NextFunction) => {
   }
   const form = new Form({
     agentId: new ObjectID(req.user.id),
-    category: req.body.coa,
+    category: parseInt(req.body.coa),
     date: req.body.formDate,
     name: {
         first: req.body.applicantFirstName,
@@ -109,6 +109,7 @@ export let getFormPDF = (req: Request, res: Response) => {
             form: doc,
             getOption: getOption,
             dateTransform: dateTransform,
+            coaSelection: CONSTANTS.coaSelection,
             dobProofSelection: CONSTANTS.dobProofSelection,
             addressProofSelection: CONSTANTS.addressProofSelection,
             identityProofSelection: CONSTANTS.identityProofSelection,
