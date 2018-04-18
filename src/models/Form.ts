@@ -3,7 +3,7 @@ import { ObjectId, ObjectID } from "bson";
 
 const formSchema = new mongoose.Schema({
     agentId: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
-    category: { type: String, default: "Individual" },
+    category: Number,
     date: {type: Date, default: Date.now()},
     name: {
         first: String,
@@ -39,7 +39,7 @@ const formSchema = new mongoose.Schema({
 
   export type FormModel = mongoose.Document &  {
     id: ObjectId,
-    category: string,
+    category: number,
     date: Date,
     name: {
         first: string,
