@@ -35,6 +35,8 @@
               i.caret
             ul.dropdown-menu
               li
+                a(href='/reset') Change Password
+              li
                 a(href='/logout') Logout
           if user.role == 1
             li(class=(title == 'Create Account') ? 'active' : undefined)

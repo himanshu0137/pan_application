@@ -224,22 +224,7 @@ export let getOauthUnlink = (req: Request, res: Response, next: NextFunction) =>
  * Reset Password page.
  */
 export let getReset = (req: Request, res: Response, next: NextFunction) => {
-  if (req.isAuthenticated()) {
-    return res.redirect("/");
-  }
-  User
-    .findOne({ passwordResetToken: req.params.token })
-    .where("passwordResetExpires").gt(Date.now())
-    .exec((err, user) => {
-      if (err) { return next(err); }
-      if (!user) {
-        req.flash("errors", { msg: "Password reset token is invalid or has expired." });
-        return res.redirect("/forgot");
-      }
-      res.render("account/reset", {
-        title: "Password Reset"
-      });
-    });
+    res.render("account/reset");
 };
 
 /**
@@ -260,12 +245,10 @@ export let postReset = (req: Request, res: Response, next: NextFunction) => {
   async.waterfall([
     function resetPassword(done: Function) {
       User
-        .findOne({ passwordResetToken: req.params.token })
-        .where("passwordResetExpires").gt(Date.now())
-        .exec((err, user: any) => {
+        .findById(req.user.id, (err, user: any) => {
           if (err) { return next(err); }
           if (!user) {
-            req.flash("errors", { msg: "Password reset token is invalid or has expired." });
+            req.flash("errors", { msg: "Can't find user" });
             return res.redirect("back");
           }
           user.password = req.body.password;
@@ -278,26 +261,26 @@ export let postReset = (req: Request, res: Response, next: NextFunction) => {
             });
           });
         });
-    },
-    function sendResetPasswordEmail(user: UserModel, done: Function) {
-      const transporter = nodemailer.createTransport({
-        service: "SendGrid",
-        auth: {
-          user: process.env.SENDGRID_USER,
-          pass: process.env.SENDGRID_PASSWORD
-        }
-      });
-      const mailOptions = {
-        to: user.email,
-        from: "express-ts@starter.com",
-        subject: "Your password has been changed",
-        text: `Hello,\n\nThis is a confirmation that the password for your account ${user.email} has just been changed.\n`
-      };
-      transporter.sendMail(mailOptions, (err) => {
-        req.flash("success", { msg: "Success! Your password has been changed." });
-        done(err);
-      });
-    }
+     }// ,
+    // function sendResetPasswordEmail(user: UserModel, done: Function) {
+    //   const transporter = nodemailer.createTransport({
+    //     service: "SendGrid",
+    //     auth: {
+    //       user: process.env.SENDGRID_USER,
+    //       pass: process.env.SENDGRID_PASSWORD
+    //     }
+    //   });
+    //   const mailOptions = {
+    //     to: user.email,
+    //     from: "express-ts@starter.com",
+    //     subject: "Your password has been changed",
+    //     text: `Hello,\n\nThis is a confirmation that the password for your account ${user.email} has just been changed.\n`
+    //   };
+    //   transporter.sendMail(mailOptions, (err) => {
+    //     req.flash("success", { msg: "Success! Your password has been changed." });
+    //     done(err);
+    //   });
+    // }
   ], (err) => {
     if (err) { return next(err); }
     res.redirect("/");
