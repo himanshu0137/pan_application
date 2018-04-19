@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  const currentDate = new Date();
+  const currentDateString = currentDate.getFullYear().toString() + "-" + ("0" + (currentDate.getMonth() + 1).toString()).slice(-2) + "-" + currentDate.getDate().toString();
+  // console.log(currentDateString);
+  $("#formDate").val(currentDateString);
     $("#coa").change(function(event) {
       $.ajax("/proof/selections/" + (this as any).value, {
         complete: (data) => {
