@@ -106,6 +106,7 @@ app.get("/edituser/:agentId", userController.getEditUser);
 app.get("/edituser/deleteUser/:agentId", userController.deleteUser);
 app.post("/edituser/:agentId", userController.editUser);
 app.get("/balancehistory", dashboardController.getBalanceHistory);
+app.get("/proof/selections/:index", formController.getProofSelection);
 // app.get("/contact", contactController.getContact);
 // app.post("/contact", contactController.postContact);
 // app.get("/account", passportConfig.isAuthenticated, userController.getAccount);

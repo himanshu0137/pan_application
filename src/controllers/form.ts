@@ -7,6 +7,12 @@ import { CONSTANTS } from "../util/constants";
 import { constants } from "zlib";
 const request = require("express-validator");
 
+type ProofSelectionData = {
+    identity: string[],
+    address: string[],
+    dob: string[]
+};
+
 const dateTransform = (date: Date) => {
     if (date)
         return date.toDateString();
@@ -23,9 +29,6 @@ export let getForm = (req: Request, res: Response) => {
     return res.render("form", {
         title: "Form",
         coaSelection: CONSTANTS.coaSelection,
-        dobProofSelection: CONSTANTS.dobProofSelection,
-        addressProofSelection: CONSTANTS.addressProofSelection,
-        identityProofSelection: CONSTANTS.identityProofSelection,
         states: CONSTANTS.states
     });
   }
@@ -103,17 +106,67 @@ export let postForm = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export let getFormPDF = (req: Request, res: Response) => {
-    Form.findById(req.params.formId, (err, doc) => {
+    Form.findById(req.params.formId, (err, doc: FormModel) => {
+        const FormSelections: ProofSelectionData = ProofSelection(doc.category);
         res.render("formdetails", {
             title: "Form Details",
             form: doc,
             getOption: getOption,
             dateTransform: dateTransform,
             coaSelection: CONSTANTS.coaSelection,
-            dobProofSelection: CONSTANTS.dobProofSelection,
-            addressProofSelection: CONSTANTS.addressProofSelection,
-            identityProofSelection: CONSTANTS.identityProofSelection,
+            dobProofSelection: FormSelections.dob,
+            addressProofSelection: FormSelections.address,
+            identityProofSelection: FormSelections.identity,
             states: CONSTANTS.states
         });
     });
 };
+
+export let getProofSelection = (req: Request, res: Response) => {
+    return res.send(
+        ProofSelection(
+            parseInt(req.params.index)
+        )
+    );
+};
+
+function ProofSelection(index: number): ProofSelectionData {
+    switch (index) {
+        case 0: return undefined;
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8: {
+            return {
+                address: CONSTANTS.addressProofSelection,
+                dob: CONSTANTS.dobProofSelection,
+                identity: CONSTANTS.identityProofSelection
+            };
+        }
+        case 9: {
+            return {
+                address: CONSTANTS.addressProofSelectionForAJP,
+                dob: CONSTANTS.dobProofSelection,
+                identity: CONSTANTS.identityProofSelection
+            };
+        }
+        case 10: {
+            return {
+                address: CONSTANTS.addressProofSelectionForGovt,
+                dob: CONSTANTS.dobProofSelection,
+                identity: CONSTANTS.identityProofSelectionForGovt
+            };
+        }
+        case 11: {
+            return {
+                address: CONSTANTS.addressProofSelectionForLLP,
+                dob: CONSTANTS.dobProofSelection,
+                identity: CONSTANTS.identityProofSelectionForLLP
+            };
+        }
+    }
+}

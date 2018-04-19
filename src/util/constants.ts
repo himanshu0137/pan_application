@@ -115,5 +115,29 @@ export const CONSTANTS = {
         "Artificial Juridical Person",
         "Government",
         "Limited Liability Partnership"
+    ],
+    addressProofSelectionForAJP: [
+        "Please Select",
+        "Agreement",
+        "Certificate of registration issued by any other competent authority.",
+        "Certificate of registration issued by charity commissioner.",
+        "Certificate of registration issued by registrar of co-op Society",
+        "Any Document originating from any central or state Govt. Department establishing identity of such person."
+    ],
+    addressProofSelectionForGovt: [
+        "Please Select",
+        "Any document originating from any central or state Govt. Department establishing address of such person"
+    ],
+    identityProofSelectionForGovt: [
+        "Please Select",
+        "Any document originating from any central or state Govt. Department establishing address of such person"
+    ],
+    addressProofSelectionForLLP: [
+        "Please Select",
+        "Copy of certificate of Registration issued by the Registrar of Firms/Limited liability partnerships"
+    ],
+    identityProofSelectionForLLP: [
+        "Please Select",
+        "Copy of certificate of Registration issued by the Registrar of Firms/Limited liability partnerships"
     ]
 };

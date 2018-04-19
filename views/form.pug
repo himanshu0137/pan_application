@@ -16,7 +16,7 @@ block content
                   option(value=index)= value
             td Date
             td(colspan="3")
-              input(type="date" name="formDate")
+              input(type="date" name="formDate" id="formDate")
           tr
             td
             td Last Name/Surname
@@ -104,21 +104,15 @@ block content
           tr
             td Proof of Identity
             td(colspan="3") 
-              select(name="proofIdentity")
-                each value, index in identityProofSelection
-                  option(value=index)= value
+              select(name="proofIdentity" id="proofIdentity")
           tr
             td Proof of Address
             td(colspan="3") 
-              select(name="proofAddress")
-                each value, index in addressProofSelection
-                  option(value=index)= value
+              select(name="proofAddress" id="proofAddress")
           tr
             td Proof of DOB
             td(colspan="3") 
-              select(name="proofDOB")
-                each value, index in dobProofSelection
-                  option(value=index)= value
+              select(name="proofDOB" id="proofDOB")
           tr
             td Processing Fee
             td(colspan="3") 
@@ -130,3 +124,6 @@ block content
           button.btn.btn-primary(type='submit')
             i.fa.fa-envelope
             | Send
+
+block scripts
+  script(src="/js/formOptions.js")

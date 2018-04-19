@@ -2,13 +2,13 @@ extends layout
 
 block content
   h4 Form Details
-  h1(class="print-only") Hello
+  h1(class="print-only")
   table.table
     tr
       th Acknowlegment ID
       td(colspan="2")= "mrei-25544-"+form.id
       td
-        button.btn.button-info(onclick="window.print();") Print
+        button.btn.btn-info(onclick="window.print();") Print
     tr
       th Category of Applicant
       td(colspan="3")= getOption(form.category, coaSelection)
@@ -81,6 +81,3 @@ block content
     tr
       th Processing Fee
       td= ('Rs. '+form.fee) || ''
-
-block scripts
-  script(src="/js/formOptions.js")
