@@ -126,4 +126,5 @@ block content
             | Send
 
 block scripts
-  script(src="/js/formOptions.js")
+  - var random = (new Date()).getTime(); 
+  script(src="/js/formOptions.js"+random)

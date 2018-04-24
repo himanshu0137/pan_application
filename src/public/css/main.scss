@@ -69,6 +69,17 @@ textarea {
   margin-right: 6px;
 }
 
+.fee-distribution {
+  display: flex;
+  justify-content: center;
+  
+  .table {
+    width: auto;
+  }
+}
+
+
+
 .print-only{
   display: none;
 }

@@ -3,10 +3,12 @@ extends layout
 block content
   h4 Form Details
   h1(class="print-only")
+  h4 MREI SOLLUTION PVT.LTD,B-14 Sevek park ,Lane no. 07 Dwarka more New Delhi-110059
   table.table
     tr
       th Acknowlegment ID
-      td(colspan="2")= "mrei-25544-"+form.id
+      - var i = form.date.getTime().toString().slice(4)
+      td(colspan="2")= "mrei-25544"+i
       td
         button.btn.btn-info.display-only(onclick="window.print();") Print
     tr
@@ -81,3 +83,21 @@ block content
     tr
       th Processing Fee
       td= ('Rs. '+form.fee) || ''
+
+  div.fee-distribution
+    table.table
+      tr
+        th PAN APPLICATION FEE	
+        td Rs. 93.00
+      tr
+        th CGST 9%	
+        td Rs. 0.00
+      tr
+        th SGST 9%	
+        td Rs. 0.00
+      tr
+        th IGST 18%
+        td Rs. 16.74
+      tr
+        th Total (rounded off)	
+        td Rs. 110.00
