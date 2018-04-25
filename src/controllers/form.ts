@@ -174,8 +174,8 @@ function ProofSelection(index: number): ProofSelectionData {
 }
 
 function getFormId(formId: string, agentId: string): string {
-    const formRandomBit = parseInt(formId.substr(formId.length - 6), 16) % 10007;
-    const agentRandomBit = parseInt(agentId.substr(agentId.length - 6), 16) % 10007;
+    const formRandomBit = parseInt(formId.substr(formId.length - 6), 16) % CONSTANTS.formIdNumber;
+    const agentRandomBit = parseInt(agentId.substr(agentId.length - 6), 16) % CONSTANTS.formIdNumber;
     return "mrei-25544" + padNumber(formRandomBit, 5) + padNumber(agentRandomBit, 5);
 }
 
