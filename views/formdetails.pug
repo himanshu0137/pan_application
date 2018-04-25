@@ -7,8 +7,7 @@ block content
   table.table
     tr
       th Acknowlegment ID
-      - var i = form.date.getTime().toString().slice(4)
-      td(colspan="2")= "mrei-25544"+i
+      td(colspan="2")= formId
       td
         button.btn.btn-info.display-only(onclick="window.print();") Print
     tr

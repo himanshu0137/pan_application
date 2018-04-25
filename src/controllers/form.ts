@@ -108,9 +108,11 @@ export let postForm = (req: Request, res: Response, next: NextFunction) => {
 export let getFormPDF = (req: Request, res: Response) => {
     Form.findById(req.params.formId, (err, doc: FormModel) => {
         const FormSelections: ProofSelectionData = ProofSelection(doc.category);
+        const formId: string = getFormId(doc._id.toString(), (doc as any).agentId.toString());
         res.render("formdetails", {
             title: "Form Details",
             form: doc,
+            formId: formId,
             getOption: getOption,
             dateTransform: dateTransform,
             coaSelection: CONSTANTS.coaSelection,
@@ -169,4 +171,21 @@ function ProofSelection(index: number): ProofSelectionData {
             };
         }
     }
+}
+
+function getFormId(formId: string, agentId: string): string {
+    const formRandomBit = parseInt(formId.substr(formId.length - 6), 16) % 10007;
+    const agentRandomBit = parseInt(agentId.substr(agentId.length - 6), 16) % 10007;
+    return "mrei-25544" + padNumber(formRandomBit, 5) + padNumber(agentRandomBit, 5);
+}
+
+function padNumber(n: number, len: number): string {
+    let s = n.toString();
+    const l = s.length;
+    if (l < len) {
+        for (let i = 0; i < (len - l); i++) {
+            s = "0" + s;
+        }
+    }
+    return s;
 }
